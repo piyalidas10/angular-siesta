@@ -2,13 +2,13 @@
 Angular UI Regression Testing
 
 Siesta (the Sencha / Bryntum Siesta testing framework) is mainly used for end-to-end (E2E) and UI automation in JavaScript apps—especially Angular, ExtJS, React, and plain JS apps.  
-
+```
 Siesta (E2E Layer)
  ├── Runs in real browser
  ├── Loads built Angular app
  ├── Simulates real user events
  └── Asserts DOM + behavior
-
+```
 👉 Siesta does NOT replace Jasmine/Jest  
 👉 It replaces Protractor / flaky E2E  
 
