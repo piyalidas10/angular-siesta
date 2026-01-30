@@ -60,3 +60,11 @@ t.waitForSelector('.admin-dashboard');
 ```
 🔥 Very useful for Module Federation / Native Federation setups.
 
+## ⚡ Siesta vs Cypress vs Playwright
+| Feature               | Siesta       | Cypress  | Playwright |
+| --------------------- | ------------ | -------- | ---------- |
+| Runs inside browser   | ✅           | ❌      | ❌         |
+| True event simulation | ✅           | ⚠️      | ✅         |
+| Angular-friendly      | ✅           | ⚠️      | ⚠️         |
+| Legacy app support    | ✅           | ❌      | ⚠️         |
+| Best for complex UI   | ⭐⭐⭐⭐   | ⭐⭐⭐  | ⭐⭐⭐⭐ |
