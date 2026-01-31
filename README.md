@@ -79,3 +79,20 @@ t.waitForSelector('.admin-dashboard');
 | Angular-friendly      | ✅           | ⚠️      | ⚠️         |
 | Legacy app support    | ✅           | ❌      | ⚠️         |
 | Best for complex UI   | ⭐⭐⭐⭐   | ⭐⭐⭐  | ⭐⭐⭐⭐ |
+
+## ✅ Run Siesta
+> “Siesta doesn’t expose a global CLI, so we invoke it directly from node_modules/siesta/bin/siesta. This avoids npx resolution issues and works reliably in CI.”
+
+Siesta’s executable lives here:
+```
+node_modules/siesta/bin/siesta
+```
+So you must run that binary directly.
+
+**package.json**  
+Update your script to this 👇
+```
+"scripts": {
+  "siesta": "ng build && node node_modules/siesta/bin/siesta siesta/siesta.config.js --headless"
+}
+```
