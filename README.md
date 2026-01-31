@@ -80,19 +80,81 @@ t.waitForSelector('.admin-dashboard');
 | Legacy app support    | ✅           | ❌      | ⚠️         |
 | Best for complex UI   | ⭐⭐⭐⭐   | ⭐⭐⭐  | ⭐⭐⭐⭐ |
 
-## ✅ Run Siesta
+## 🔍 Siesta Package
+| Package                | Purpose                      |
+| ---------------------- | ---------------------------- |
+| `siesta`               | ❌ random npm utility        |
+| `@bryntum/siesta`      | ✅ REAL UI testing framework |
+| `@bryntum/siesta-lite` | ✅ Free limited version      |
+
+
+## 🟢 Setup Siesta
+The Siesta E2E framework is published as @bryntum/siesta.
+Install bryntum Siesta
+```
+npm install --save-dev @bryntum/siesta
+```
+
 > “Siesta doesn’t expose a global CLI, so we invoke it directly from node_modules/siesta/bin/siesta. This avoids npx resolution issues and works reliably in CI.”
 
-Siesta’s executable lives here:
-```
-node_modules/siesta/bin/siesta
-```
-So you must run that binary directly.
+**✅ Correct harness file**
 
+Siesta CLI loads the UI, you don’t manually load siesta.js.
+
+Your siesta/index.html should be:
+```
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Angular 19 + Siesta</title>
+  <script src="./helpers/angular-stability.js"></script>
+</head>
+<body></body>
+</html>
+```
+👉 The CLI injects Siesta automatically.
+
+
+**Folder structure**
+```
+sencha-basic/
+ ├── siesta/
+ │   ├── siesta.config.js
+ │   ├── index.html
+ │   └── helpers/
+ │       └── angular-stability.js
+```
+
+**siesta.config.js**
+```
+StartTest(t => {
+  t.setPageUrl('http://localhost:4200/');
+  t.waitForAngular();
+});
+```
+
+## ✅ Run Siesta
 **package.json**  
-Update your script to this 👇
+Update your script to this 👇  
+Siesta automatically loads siesta.config.js if it’s in the working directory.  
+Use npx siesta (RECOMMENDED ✅). This avoids the ESM loader problem entirely.
 ```
 "scripts": {
-  "siesta": "ng build && node node_modules/siesta/bin/siesta siesta/siesta.config.js --headless"
+  "siesta": "ng build && npx siesta --project ./siesta/siesta.project.mjs --headless"
 }
 ```
+Using .mjs files and running Siesta via npx ensures paths are resolved as proper file:// URLs internally.
+
+Make sure:
+```
+sencha-basic/
+ ├── siesta/
+ │   └── siesta.config.js
+```
+
+**🚀 What will happen next (expected)**
+  - npm run siesta starts
+  - Angular builds
+  - Siesta launches headless browser
+  - Page loads localhost:4200
+  - Tests start executing
